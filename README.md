@@ -1,2 +1,2 @@
-# IcarusExecutor.github.io
+# IcarusExE.github.io
 Icarus Executor Official Site
