@@ -26,7 +26,7 @@ const unbounded = Unbounded({
 });
 
 export const metadata: Metadata = {
-  // pins every relative/OG url to the .dev origin so nothing canonicalises back to .site
+  // Resolve relative metadata URLs against the public GitHub Pages address.
   metadataBase: new URL(config.site),
   alternates: { canonical: "./" },
   title: config.title,
@@ -75,7 +75,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {process.env.UMAMI_SITE_ID && (
+        {process.env.UMAMI_SITE_ID && UMAMI_SRC && (
           <Script
             defer
             src={UMAMI_SRC}

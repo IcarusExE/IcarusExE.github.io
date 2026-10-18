@@ -1,7 +1,14 @@
 {
-  "name": "portfolio",
-  "version": "0.1.0",
+  "name": "kenan-kuscu-portfolio",
+  "version": "1.0.0",
   "private": true,
+  "description": "Kenan Kuşçu'nun GitHub Pages, Cloudflare Workers ve D1 tabanlı 3D portföyü.",
+  "author": "Kenan Kuşçu",
+  "homepage": "https://icarusexe.github.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IcarusExE/IcarusExE.github.io.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

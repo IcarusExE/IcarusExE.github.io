@@ -4,8 +4,8 @@ const footer: { title: string; href: string }[] = [
     href: "/blogs",
   },
   {
-    title: "Newsletter",
-    href: "/news",
+    title: "GitHub",
+    href: "https://github.com/IcarusExE",
   },
 ];
 

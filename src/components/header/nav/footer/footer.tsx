@@ -13,8 +13,7 @@ export default function Footer() {
           animate="enter"
           exit="exit"
         >
-          {/* space */}
-          <span>Inspired by:</span> Studio Lumio
+          <span>Portföy:</span> Kenan Kuşçu
         </motion.li>
       </ul>
       <ul>
@@ -25,7 +24,7 @@ export default function Footer() {
           animate="enter"
           exit="exit"
         >
-          <span>Typography:</span> Inter
+          <span>Yayın:</span> GitHub Pages
         </motion.li>
       </ul>
       <ul>
@@ -36,7 +35,7 @@ export default function Footer() {
           animate="enter"
           exit="exit"
         >
-          <span>Images:</span> Unsplash
+          <span>İçerik:</span> Cloudflare D1
         </motion.li>
       </ul>
       <ul>
@@ -56,7 +55,7 @@ export default function Footer() {
           animate="enter"
           exit="exit"
         >
-          Newsletter
+          GitHub
         </motion.li>
       </ul>
     </div>

@@ -1,233 +1,70 @@
-# Kenan Kuşçu 3D Portföyü
+# Kenan Kuşçu | 3D Portföy
 
-Ana site GitHub Pages üzerinde statik olarak, içerik API'si ve yönetim paneli Cloudflare Workers + D1 üzerinde çalışır.
+Kenan Kuşçu'nun projelerini, becerilerini ve deneyimlerini sergileyen kişisel portföy uygulaması.
 
-- Site: `https://icarusexe.github.io`
-- API: `https://portfolio.kenankuscu.workers.dev/api/content`
-- Yönetim: `https://portfolio.kenankuscu.workers.dev/admin`
+- Web sitesi: [icarusexe.github.io](https://icarusexe.github.io)
+- GitHub: [github.com/IcarusExE](https://github.com/IcarusExE)
+- Yönetim paneli: [portfolio.kenankuscu.workers.dev/admin](https://portfolio.kenankuscu.workers.dev/admin/)
+- İçerik API'si: [portfolio.kenankuscu.workers.dev/api/content](https://portfolio.kenankuscu.workers.dev/api/content)
 
-Profil, sosyal bağlantılar, bölüm metinleri, beceriler, deneyimler ve projeler yönetim panelinden güncellenebilir. İletişim formu mesajları D1'e kaydeder ve panelde listeler. API erişilemezse `src/data/portfolio-content.ts` içindeki Kenan varsayılanları kullanılır.
+## Yapı
 
-## Dağıtım komutları
+Portföy arayüzü Next.js ile statik olarak oluşturulur ve GitHub Pages üzerinde yayınlanır. Profil, sosyal bağlantılar, bölüm metinleri, beceriler, deneyimler ve projeler Cloudflare D1 üzerinde tutulur. Cloudflare Worker hem içerik API'sini hem de yönetim panelini sunar.
+
+İletişim formundan gönderilen mesajlar D1'e kaydedilir ve yalnızca yönetim panelinden görüntülenebilir. API geçici olarak erişilemezse site `src/data/portfolio-content.ts` içindeki Kenan Kuşçu varsayılanlarıyla çalışmaya devam eder.
+
+## Yerel geliştirme
+
+Gereksinimler: Node.js 20.9 veya üzeri ve pnpm 11.
 
 ```bash
+git clone https://github.com/IcarusExE/IcarusExE.github.io.git
+cd IcarusExE.github.io
 pnpm install --frozen-lockfile
-pnpm typecheck
-pnpm build
-pnpm db:remote
-pnpm worker:deploy
+cp .env.example .env.local
+pnpm dev
 ```
 
-Worker secret'ları `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH` ve `SESSION_SECRET` olarak Cloudflare'da tutulur; repoya yazılmaz. GitHub Pages dağıtımı `.github/workflows/pages.yml` ile `main` dalına her push'ta otomatik çalışır.
+Uygulama varsayılan olarak `http://localhost:3000` adresinde açılır. Kullanılan ortam değişkenleri `.env.example` dosyasında belgelenmiştir.
 
----
+## İçerik yönetimi
 
-<div align="center">
+Yönetim panelinden aşağıdaki alanlar kod değişikliği yapmadan güncellenebilir:
 
-# 🚀 3D Portfolio
+- Profil ve sosyal medya bağlantıları
+- Site bölüm başlıkları ve açıklamaları
+- Beceriler ve 3D klavye bilgileri
+- Eğitim ve deneyim geçmişi
+- Projeler ve yayın durumları
+- İletişim formu mesajları
 
-**A developer portfolio you can actually play with.** Press keys on a 3D keyboard, watch other visitors' cursors fly by, and chat with whoever's online.
+Yönetici kullanıcı adı, parola özeti ve oturum anahtarı kaynak kodda tutulmaz. Bunlar Cloudflare secret olarak tanımlanır:
 
-### [✨ Live Demo → nareshkhatri.dev](https://nareshkhatri.dev)
+```bash
+pnpm exec wrangler secret put ADMIN_USERNAME
+pnpm exec wrangler secret put ADMIN_PASSWORD_HASH
+pnpm exec wrangler secret put SESSION_SECRET
+```
 
-[![GitHub stars](https://img.shields.io/github/stars/Naresh-Khatri/3d-portfolio?style=flat&logo=github)](https://github.com/Naresh-Khatri/3d-portfolio/stargazers)
-[![Forks](https://img.shields.io/github/forks/Naresh-Khatri/3d-portfolio?style=flat&logo=github)](https://github.com/Naresh-Khatri/3d-portfolio/network/members)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Naresh-Khatri/3d-portfolio)
-
-<!-- swap for demo video: drag an .mp4 into the GitHub web editor, paste the user-attachments URL on its own line here -->
-![Portfolio Preview](https://github.com/Naresh-Khatri/3d-portfolio/blob/main/public/assets/projects-screenshots/portfolio/landing.png?raw=true)
-
-</div>
-
-> **Free to use!** This portfolio is open source. If you use it, a credit/link back would be really appreciated 🙏
-
-## ✨ Features
-
-- **Interactive 3D Keyboard** — Programmatically generated Chibi keyboard where each keycap represents a skill, revealing titles and descriptions on hover/press. Try colors, logos, and layouts in the [Chibi keycap customizer](https://chibi.nareshkhatri.dev/demo/keycaps).
-- **Live Multiplayer** — See other visitors' cursors in realtime, who's online, and chat with them ([details](#-realtime-features-optional))
-- **Buttery Animations** — GSAP + Framer Motion powered scroll, hover, and reveal animations
-- **Space Theme** — Floating particles on a dark canvas for a cosmic vibe
-- **Easter Eggs** — Open DevTools and follow the clues 🐱
-- **Light & Dark Mode** — Full theme support with cheeky disclaimer toasts
-- **Responsive** — Works across all screen sizes
-- **Contact Form** — Email delivery via Resend
-- **Analytics** _(optional)_ — Umami analytics integration
-
-## 🛠️ Tech Stack
-
-| Layer | Technologies |
-|---|---|
-| **Framework** | Next.js 16.2.2, React 19.2.4, TypeScript |
-| **Styling** | Tailwind CSS, Shadcn UI, Aceternity UI |
-| **Animation** | GSAP, Framer Motion |
-| **3D** | @chibi3d/runtime, Three.js, React Three Fiber |
-| **Email** | Resend |
-| **Misc** | Lenis (smooth scroll), Zod, next-themes |
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 20.9+ for Next.js 16; use a current LTS release with pnpm 11
-- pnpm 11.20.0
-
-### Installation
-
-1. **Clone the repository:**
-
-    ```bash
-    git clone https://github.com/Naresh-Khatri/3d-portfolio.git
-    cd 3d-portfolio
-    ```
-
-2. **Install dependencies:**
-
-    ```bash
-    pnpm install
-    ```
-
-3. **Set up environment variables:**
-
-    Copy `.env.example` to `.env.local` and fill in the values:
-
-    ```bash
-    cp .env.example .env.local
-    ```
-
-    | Variable | Required | Description |
-    |---|---|---|
-    | `RESEND_API_KEY` | Yes | API key from [Resend](https://resend.com) for the contact form |
-    | `NEXT_PUBLIC_WS_URL` | No | WebSocket server URL for realtime features (cursors, chat, presence) |
-    | `UMAMI_DOMAIN` | No | Umami analytics script URL |
-    | `UMAMI_SITE_ID` | No | Umami website ID |
-
-4. **Run the development server:**
-
-    ```bash
-    pnpm dev
-    ```
-
-5. Open [http://localhost:3000](http://localhost:3000) and see the magic ✨
-
----
-
-## Code checks
-
-Run these before opening a pull request:
+## Kontrol ve dağıtım
 
 ```bash
 pnpm lint
 pnpm typecheck
+pnpm build
 ```
 
-Next.js 16 no longer runs lint during builds. The ESLint CLI uses `eslint.config.mjs`. New React Compiler diagnostics for refs, immutability, effect state updates, and manual memoization report warnings while existing animation and realtime components are migrated. Hook ordering violations remain errors.
+`main` dalına gönderilen değişiklikler `.github/workflows/pages.yml` iş akışıyla GitHub Pages'a otomatik dağıtılır.
 
-Blog frontmatter requires a title, summary, and `publishedAt` date in `YYYY-MM-DD` format. Optional fields are `image`, `author`, and a list of `tags`. Invalid frontmatter raises a content error; unknown blog slugs return a 404.
+Worker ve D1 değişiklikleri için:
 
-Files under `public/assets` can be replaced at the same URL and cache for one hour before revalidation. Next.js content-hashed static assets retain immutable caching.
-
----
-
-## 🎨 Make It Your Own
-
-All personal info is centralized in [`src/data/config.ts`](src/data/config.ts). Edit this single file to rebrand the portfolio:
-
-```ts
-const config = {
-  title: "Your Name | Your Title",
-  description: {
-    long: "Your long description for SEO...",
-    short: "Your short description...",
-  },
-  keywords: ["your", "keywords"],
-  author: "Your Name",
-  email: "you@example.com",
-  site: "https://yoursite.com",
-
-  // GitHub stars button in the header
-  githubUsername: "your-github-username",
-  githubRepo: "your-repo-name",
-
-  social: {
-    twitter: "https://x.com/you",
-    linkedin: "https://linkedin.com/in/you",
-    instagram: "https://instagram.com/you",
-    facebook: "https://facebook.com/you",
-    github: "https://github.com/you",
-  },
-};
+```bash
+pnpm db:remote
+pnpm worker:deploy
 ```
 
-Other files you'll want to customize:
+Worker adı `portfolio`, üretim adresi ise `portfolio.kenankuscu.workers.dev` olarak yapılandırılmıştır.
 
-| File | What to change |
-|---|---|
-| `src/data/projects.tsx` | Your projects, screenshots, descriptions, and tech stacks |
-| `src/data/constants.ts` | Skills list (name, description, icon) and work experience |
-| `public/assets/` | Your images, OG image, and project screenshots |
+## Proje sahipliği
 
----
-
-## ⌨️ Customize the 3D keyboard
-
-Try colors, logos, and layouts in the [Chibi keycap customizer](https://chibi.nareshkhatri.dev/demo/keycaps), then apply your choices to `SKILLS` in [`src/data/constants.ts`](src/data/constants.ts):
-
-- `keyboardColor`: keycap color, such as `"#ff9408"`.
-- `keyboardIcon`: copy an SVG URL from [thesvg.org](https://thesvg.org) and paste it here. You can also use a local file under `public/assets/keyboard/logos/`.
-- `label` and `shortDescription`: text shown when interacting with a key.
-- `shortcut`: optional physical key code, such as `"KeyQ"`. Keep shortcuts unique; defaults follow QWERTY letter order.
-
-The demo accepts logo names too, but `keyboardIcon` needs an image URL or local asset path. Without keyboard overrides, keys use the skill's `color` and `icon`.
-
-Keys follow the order of `SKILLS`. To change the default six columns, pass a second argument to `createKeyboardScene` in [`keyboard-scene.tsx`](src/components/keyboard/keyboard-scene.tsx). Rows adjust automatically to the skill count.
-
----
-
-## 🔌 Realtime Features (Optional)
-
-The portfolio supports optional realtime features powered by a **separate backend API**:
-
-- 🖱️ **Live cursors** — See other visitors' cursors in realtime
-- 👥 **Online presence** — Shows who's currently on the site
-- 💬 **Chat** — Live chat between visitors
-- **Zombie Survival** with multiplayer and leaderboards on the live site.
-
-These features activate automatically when the `NEXT_PUBLIC_WS_URL` environment variable is set. Without it, the portfolio works perfectly fine as a static site — no realtime features, no backend dependency.
-
-> [!NOTE]
-> The backend API is **not open source**. This is intentional! Too many people have cloned the portfolio and claimed they built it from scratch. The realtime server stays private to keep the live experience unique and make it stand out.
-
-
----
-
-## 🚀 Deployment
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Naresh-Khatri/3d-portfolio)
-
-This site is deployed on **Vercel**. To deploy your own:
-
-1. Push your code to a GitHub repository
-2. Connect the repository to [Vercel](https://vercel.com)
-3. Add your environment variables in the Vercel dashboard
-4. Vercel handles the rest — automatic deployments on every push
-
----
-
-## 🤝 Contributing
-
-If you'd like to contribute or suggest improvements, feel free to open an issue or submit a pull request. All contributions are welcome!
-
----
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-If you use this portfolio, a credit or link back to the [original repo](https://github.com/Naresh-Khatri/3d-portfolio) would be much appreciated ❤️
-
-Note on analytics: a deployed copy reports its own hostname once per browser (nothing else — no visitor, page, or referrer data) so I can see where the template gets used.
+Bu depo Kenan Kuşçu tarafından `IcarusExE` hesabı altında sürdürülmektedir. Portföy içeriği, kişisel bilgiler ve proje yapılandırması Kenan Kuşçu'ya aittir. Kullanılan açık kaynak paketlerin ve `public/assets/game` altındaki üçüncü taraf varlıkların hakları kendi sahiplerine aittir; ilgili lisans bildirimleri varlık klasörlerinde korunmaktadır.
