@@ -169,7 +169,7 @@ export default {
       const url = new URL(request.url);
       let response;
       if (url.pathname.startsWith("/api/")) response = await api(request, env);
-      else if (url.pathname === "/admin" || url.pathname === "/admin/") response = await env.ASSETS.fetch(new Request(new URL("/admin/index.html", url), request));
+      else if (url.pathname === "/admin" || url.pathname === "/admin/") response = await env.ASSETS.fetch(new Request(new URL("/admin/", url), request));
       else response = await env.ASSETS.fetch(request);
       return securityHeaders(response);
     } catch (error) {
