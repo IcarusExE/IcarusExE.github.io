@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Portföy Yönetimi | Kenan Kuşçu</title>
+  <link rel="stylesheet" href="/admin/styles.css">
+</head>
+<body>
+  <main id="login-view" class="login-shell">
+    <form id="login-form" class="login-panel">
+      <div class="brand-mark">KK</div>
+      <h1>Portföy yönetimi</h1>
+      <p>İçerikleri düzenlemek için giriş yapın.</p>
+      <label>Kullanıcı adı<input name="username" autocomplete="username" required></label>
+      <label>Parola<input name="password" type="password" autocomplete="current-password" minlength="8" required></label>
+      <button type="submit">Giriş yap</button>
+      <p id="login-error" class="error" role="alert"></p>
+    </form>
+  </main>
+
+  <div id="admin-view" class="app" hidden>
+    <aside class="sidebar">
+      <div class="identity"><span class="brand-mark small">KK</span><div><strong>Kenan Kuşçu</strong><small>İçerik yönetimi</small></div></div>
+      <nav id="nav" aria-label="Yönetim bölümleri">
+        <button data-view="general" class="active">Genel</button>
+        <button data-view="skills">Beceriler</button>
+        <button data-view="experience">Deneyim</button>
+        <button data-view="projects">Projeler</button>
+        <button data-view="messages">Mesajlar</button>
+      </nav>
+      <button id="logout" class="secondary">Çıkış yap</button>
+    </aside>
+    <main class="workspace">
+      <header class="topbar">
+        <div><h1 id="view-title">Genel</h1><p id="save-state">Değişiklik yok</p></div>
+        <button id="save">Değişiklikleri kaydet</button>
+      </header>
+      <section id="editor" class="editor" aria-live="polite"></section>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script type="module" src="/admin/app.js"></script>
+</body>
+</html>

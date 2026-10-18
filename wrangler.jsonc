@@ -1,0 +1,30 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portfolio",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-18",
+  "vars": {
+    "SITE_ORIGIN": "https://icarusexe.github.io"
+  },
+  "assets": {
+    "directory": "./worker/public",
+    "binding": "ASSETS",
+    "not_found_handling": "none",
+    "run_worker_first": ["/api/*", "/admin", "/admin/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "portfolio-db",
+      "database_id": "b18ff997-f60e-463e-92db-2d431d9e3902",
+      "migrations_dir": "worker/migrations"
+    }
+  ],
+  "ratelimits": [
+    {
+      "name": "LOGIN_RATE_LIMITER",
+      "namespace_id": "2001",
+      "simple": { "limit": 5, "period": 60 }
+    }
+  ]
+}

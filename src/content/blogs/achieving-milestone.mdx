@@ -1,0 +1,31 @@
+---
+title: "Portföyü D1 ile Yönetilebilir Hale Getirmek"
+publishedAt: "2026-10-18"
+summary: "Statik bir 3D portföyün tasarımını koruyarak içerik yönetimi ve güvenli admin paneli ekleme süreci."
+author: "Kenan Kuşçu"
+tags: ["Cloudflare", "D1", "Next.js", "portfolio"]
+---
+
+# Portföyü D1 ile Yönetilebilir Hale Getirmek
+
+Bu portföyün güçlü yanı 3D etkileşimleri ve kendine özgü arayüzü. İçeriği güncellemek için kod değiştirme zorunluluğu ise sürdürülebilir değildi. Hedefim görünümü koruyup içeriği güvenli bir panelden yönetilebilir hale getirmekti.
+
+## Mimari
+
+Ana site GitHub Pages üzerinde statik olarak yayınlanıyor. Profil, beceri, deneyim ve proje verileri Cloudflare Worker API üzerinden okunuyor; kalıcı içerik Cloudflare D1 veritabanında tutuluyor.
+
+### Neden bu ayrım?
+
+Statik site hızlı ve düşük bakım maliyetli kalırken yönetim paneli yalnızca ihtiyaç duyduğu dinamik altyapıyı kullanıyor. API erişilemezse yerleşik içerik devreye giriyor ve ziyaretçi boş bir sayfayla karşılaşmıyor.
+
+## Güvenlik
+
+- Admin parolası PBKDF2 ile doğrulanıyor.
+- Oturum HttpOnly ve SameSite çerezle korunuyor.
+- Giriş denemeleri hız sınırına tabi.
+- D1 sorguları parametreli çalışıyor.
+- Yönetim uçları origin doğrulaması yapıyor.
+
+## Sonuç
+
+Portföyün mevcut etkileşimleri korunurken kişisel bilgiler artık yeniden build almadan güncellenebiliyor. Aynı yapı, varsayılan içerik değiştirilerek başka bir geliştiricinin kendi portföyüne de uyarlanabilir.
