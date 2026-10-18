@@ -1,5 +1,6 @@
 :root { color-scheme: dark; --bg:#090b10; --panel:#11141b; --raised:#171b24; --line:#2a303c; --text:#f4f6fa; --muted:#929baa; --accent:#f38020; --danger:#ef5757; font-family:Inter,ui-sans-serif,system-ui,sans-serif; }
 * { box-sizing:border-box; }
+[hidden] { display:none!important; }
 body { margin:0; min-height:100vh; background:var(--bg); color:var(--text); }
 button,input,textarea,select { font:inherit; }
 button { min-height:40px; border:0; border-radius:6px; padding:0 15px; background:var(--accent); color:#160b02; font-weight:700; cursor:pointer; }

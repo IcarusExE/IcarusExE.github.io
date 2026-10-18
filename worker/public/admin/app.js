@@ -117,7 +117,10 @@ function render() {
 
 async function showAdmin() {
   const payload = await api("/api/admin/content"); content = payload.content;
-  $("#login-view").hidden = true; $("#admin-view").hidden = false; render();
+  $("#login-view").hidden = true;
+  $("#admin-view").hidden = false;
+  window.scrollTo({ top: 0, left: 0 });
+  render();
 }
 
 $("#login-form").addEventListener("submit", async (event) => {
