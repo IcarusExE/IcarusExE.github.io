@@ -121,10 +121,20 @@ async function showAdmin() {
 }
 
 $("#login-form").addEventListener("submit", async (event) => {
-  event.preventDefault(); $("#login-error").textContent = "";
+  event.preventDefault();
+  const button = event.currentTarget.querySelector("button[type='submit']");
+  $("#login-error").textContent = "";
+  button.disabled = true;
+  button.textContent = "Kontrol ediliyor...";
+  event.currentTarget.setAttribute("aria-busy", "true");
   const data = new FormData(event.currentTarget);
   try { await api("/api/auth/login", { method:"POST", body:JSON.stringify({ username:data.get("username"), password:data.get("password") }) }); await showAdmin(); }
   catch (error) { $("#login-error").textContent = error.message; }
+  finally {
+    button.disabled = false;
+    button.textContent = "Giriş yap";
+    event.currentTarget.removeAttribute("aria-busy");
+  }
 });
 
 $("#nav").addEventListener("click", (event) => { const button = event.target.closest("button[data-view]"); if (!button) return; currentView = button.dataset.view; document.querySelectorAll("#nav button").forEach((item) => item.classList.toggle("active", item === button)); render(); });
